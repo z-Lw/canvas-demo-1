@@ -16,19 +16,35 @@
     }
 </style>
 <body>
+    <input id="color" type="color" />
+    <input type="text" id="size" onchange="sizeChange()" placeholder="画笔粗细请输入数字"></input>
     <canvas id="canvas" width:100 height:100></canvas>
 </body>
 <script>
     let canvas =document.getElementById('canvas');
+    let color=document.getElementById('color');
     let ctx = canvas.getContext('2d');
     let patting=false;
     let last;
-    ctx.fillStyle="black";
-    ctx.strokeStyle='black';
+    
+    // console.log(color.onchange.value)
+    // ctx.fillStyle=color.onchange.value;
+    // ctx.strokeStyle= color.onchange.value;
     ctx.lineCap='round';
     canvas.width = document.documentElement.clientWidth;
     canvas.height = document.documentElement.clientHeight;
     var isTouchDevice = 'ontouchstart' in document.documentElement;
+      function sizeChange() {
+
+            ctx.lineWidth = parseInt(document.getElementById('size').value);
+
+        }
+    color.onchange = function () {
+        ctx.strokeStyle = this.value
+        ctx.fillStyle = this.value
+    };
+
+
     if(isTouchDevice){
     canvas.ontouchstart=(e)=>{
         
